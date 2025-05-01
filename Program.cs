@@ -14,18 +14,17 @@ namespace InventoryBackend
                 options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
-            // ✅ Add CORS Policy that allows ALL origins
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
                 {
                     policy
-                        .SetIsOriginAllowed(origin => true)
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials(); // Optional — only if sending cookies or auth headers
+                        .AllowAnyMethod();
                 });
             });
+
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
