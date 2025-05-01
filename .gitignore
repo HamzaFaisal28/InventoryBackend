@@ -1,0 +1,42 @@
+# Ignore Visual Studio files
+.vs/
+.vs2019/
+.vs2022/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Ignore build output
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]evelopment/
+[Dd]ebug-AnyCPU/
+[Dd]ebug-x86/
+[Dd]ebug-x64/
+[Dd]ebug-AnyCPU/
+Release/
+Release-AnyCPU/
+x64/
+x86/
+
+# Ignore packages folder (when using NuGet)
+packages/
+
+# Ignore logs and database files
+*.log
+*.db
+*.bak
+
+# Ignore the .NET Core SDK folder
+project.lock.json
+project.fragment.lock.json
+
+# Ignore npm files (for Node.js applications)
+node_modules/
+
+# Ignore IntelliJ IDEA and WebStorm files
+.idea/
+
+# Ignore Mac OS X system files
+.DS_Store
