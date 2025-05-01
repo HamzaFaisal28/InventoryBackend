@@ -18,12 +18,15 @@ namespace InventoryBackend
             {
                 options.AddPolicy("AllowAll", policy =>
                 {
-                    policy
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    policy.WithOrigins(
+                        "http://localhost:5173",
+                        "https://eclectic-melomakarona-5c1b98.netlify.app/"
+                    )
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
             });
+
 
 
             builder.Services.AddControllers();
