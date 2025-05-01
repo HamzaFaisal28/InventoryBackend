@@ -13,17 +13,20 @@ namespace InventoryBackend
             builder.Services.AddDbContext<InventoryDBContext>(options =>
                 options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
-
             // ✅ Add CORS Policy
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowReactApp", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173") // React dev server
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                    policy.WithOrigins(
+                        "http://localhost:5173",
+                        "https://eclectic-melomakarona-5c1b98.netlify.app"
+                    )
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
             });
+
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
