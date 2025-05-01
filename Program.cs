@@ -13,20 +13,19 @@ namespace InventoryBackend
             builder.Services.AddDbContext<InventoryDBContext>(options =>
                 options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
                     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
-            // ✅ Add CORS Policy
+
+            // ✅ Add CORS Policy that allows ALL origins
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowReactApp", policy =>
+                options.AddPolicy("AllowAll", policy =>
                 {
-                    policy.WithOrigins(
-                        "http://localhost:5173",
-                        "https://eclectic-melomakarona-5c1b98.netlify.app"
-                    )
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    policy
+                        .SetIsOriginAllowed(origin => true)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials(); // Optional — only if sending cookies or auth headers
                 });
             });
-
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -42,8 +41,8 @@ namespace InventoryBackend
 
             app.UseHttpsRedirection();
 
-            // ✅ Use CORS before authorization
-            app.UseCors("AllowReactApp");
+            // ✅ Apply the CORS middleware BEFORE any other request handling
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 
